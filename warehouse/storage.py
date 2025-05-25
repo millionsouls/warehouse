@@ -30,3 +30,11 @@ class Storage:
             "columns": columns,
             "sample": df
         }
+    
+    def read_table(self, table_name):
+        import pandas as pd
+        import sqlite3
+        conn = sqlite3.connect(self.db_path)
+        df = pd.read_sql_query(f"SELECT * FROM {table_name}", conn)
+        conn.close()
+        return df
